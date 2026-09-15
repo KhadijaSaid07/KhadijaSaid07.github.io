@@ -1,7 +1,6 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import {
   ArrowUpRight,
-  BriefcaseBusiness,
   Link,
   Mail,
   MapPin,
@@ -34,7 +33,7 @@ const contactItems = [
     href: 'https://github.com/KhadijaSaid07',
   },
   {
-    icon: BriefcaseBusiness,
+    icon: Link,
     label: 'LinkedIn',
     value: 'Khadija Ali Said',
     href: 'https://www.linkedin.com/in/khadija-ali-said-353926363',
@@ -42,129 +41,170 @@ const contactItems = [
 ]
 
 function ContactSection() {
+  const shouldReduceMotion = useReducedMotion()
+
   return (
     <section
       id="contact"
-      className="bg-[#101716] px-5 py-20 text-[#F4EFE5] sm:px-8 md:py-24 lg:py-28"
+      className="relative overflow-hidden bg-[#FFF3E8] px-5 py-20 text-[#252525] sm:px-8 sm:py-24 lg:py-28"
     >
-      <div className="portfolio-shell">
-        <div className="section-frame">
-          <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6 }}
-            >
-              <p className="section-number">06 / CONTACT</p>
+      <div className="pointer-events-none absolute -right-24 top-20 h-64 w-64 rounded-full bg-[#D96B4A]/[0.06] sm:h-80 sm:w-80" />
 
-              <h2 className="mt-5 max-w-xl text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-                Let&apos;s build something useful.
-              </h2>
+      <div className="relative mx-auto max-w-7xl">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-20">
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: shouldReduceMotion ? 0 : 24,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.55,
+            }}
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#D96B4A]">
+              &apos;Contact
+            </p>
 
-              <p className="mt-6 max-w-lg text-base leading-7 text-[#9CA7A1] sm:text-lg">
-                Have an idea, project, collaboration, or technical
-                documentation need? I&apos;d be happy to hear about it.
-              </p>
+            <h2 className="mt-5 max-w-2xl text-4xl font-bold leading-[1.05] tracking-[-0.04em] text-[#252525] sm:text-5xl lg:text-6xl xl:text-7xl">
+              Let&apos;s build something useful.
+            </h2>
 
-              <div className="mt-8 flex items-center gap-3 text-sm text-[#9CA7A1]">
-                <MapPin size={18} className="text-[#D6AD5D]" />
-                <span>Zanzibar, Tanzania</span>
-              </div>
-            </motion.div>
+            <p className="mt-6 max-w-xl text-base leading-7 text-[#6F6A66] sm:text-lg sm:leading-8">
+              Have an idea, project, collaboration, or technical
+              documentation need? I&apos;d be happy to hear about it.
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="border-t border-[#354541]"
-            >
-              {contactItems.map((item, index) => {
-                const Icon = item.icon
+            <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium text-[#6F6A66]">
+              <MapPin
+                size={18}
+                strokeWidth={1.8}
+                className="text-[#D96B4A]"
+              />
+              <span>Zanzibar, Tanzania</span>
+            </div>
+          </motion.div>
 
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    target={
-                      item.href.startsWith('http') ? '_blank' : undefined
-                    }
-                    rel={
-                      item.href.startsWith('http')
-                        ? 'noopener noreferrer'
-                        : undefined
-                    }
-                    className="group flex items-center gap-4 border-b border-[#354541] py-5 transition-colors duration-300 hover:bg-[#172321] sm:gap-6 sm:py-6"
-                  >
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#354541] text-[#D6AD5D] transition-all duration-300 group-hover:border-[#D96B48] group-hover:bg-[#D96B48] group-hover:text-white">
-                      <Icon
-                        size={19}
-                        strokeWidth={1.7}
-                        className="transition-transform duration-300 group-hover:scale-110"
-                      />
-                    </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {contactItems.map((item, index) => {
+              const Icon = item.icon
+              const isLast = index === contactItems.length - 1
 
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs uppercase tracking-[0.18em] text-[#6F7B76]">
-                        {item.label}
-                      </p>
-
-                      <p className="mt-1 truncate text-sm text-[#F4EFE5] transition-colors duration-300 group-hover:text-[#D6AD5D] sm:text-base">
-                        {item.value}
-                      </p>
+              return (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  target={
+                    item.href.startsWith('http') ? '_blank' : undefined
+                  }
+                  rel={
+                    item.href.startsWith('http')
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
+                  initial={{
+                    opacity: 0,
+                    y: shouldReduceMotion ? 0 : 18,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                    amount: 0.15,
+                  }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.45,
+                    delay: shouldReduceMotion ? 0 : index * 0.05,
+                  }}
+                  className={`group flex min-h-[128px] flex-col justify-between rounded-2xl border border-[#E8D8CC] bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[#D96B4A] hover:shadow-[0_10px_28px_rgba(107,58,58,0.08)] sm:p-6 ${
+                    isLast ? 'sm:col-span-2' : ''
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#E8D8CC] text-[#6B3A3A] transition-colors duration-200 group-hover:border-[#D96B4A] group-hover:bg-[#D96B4A] group-hover:text-white">
+                      <Icon size={19} strokeWidth={1.8} />
                     </div>
 
                     <ArrowUpRight
                       size={18}
-                      className="shrink-0 text-[#6F7B76] transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#D96B48]"
+                      strokeWidth={1.8}
+                      className="text-[#6F6A66] transition-all duration-200 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#D96B4A]"
                     />
-                  </a>
-                )
-              })}
-            </motion.div>
-          </div>
+                  </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-12 border border-[#354541] bg-[#172321] p-6 sm:p-8"
-          >
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-xs uppercase tracking-[0.18em] text-[#D6AD5D]">
-                  KHALSA360
-                </p>
+                  <div className="mt-6 min-w-0">
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6F6A66]">
+                      {item.label}
+                    </p>
 
-                <h3 className="mt-2 text-2xl font-semibold text-[#F4EFE5]">
-                  Learn. Build. Solve. Grow.
-                </h3>
-
-                <p className="mt-2 max-w-xl text-sm leading-6 text-[#9CA7A1]">
-                  Building practical digital solutions while continuously
-                  improving through real projects and learning.
-                </p>
-              </div>
-
-              <a
-                href="mailto:khadija09said09@gmail.com"
-                className="inline-flex w-fit items-center gap-2 border border-[#D96B48] px-5 py-3 text-sm font-medium text-[#F4EFE5] transition-all duration-300 hover:bg-[#D96B48] hover:text-white"
-              >
-                Send an Email
-                <ArrowUpRight size={17} />
-              </a>
-            </div>
-          </motion.div>
-
-          <div className="mt-8 border-t border-[#354541] pt-6">
-            <p className="max-w-3xl text-sm leading-6 text-[#6F7B76]">
-              Open to learning, building meaningful projects, collaborating
-              with others, and contributing to practical technology solutions.
-            </p>
+                    <p className="mt-2 break-words text-sm font-medium leading-6 text-[#252525] transition-colors duration-200 group-hover:text-[#D96B4A] sm:text-base">
+                      {item.value}
+                    </p>
+                  </div>
+                </motion.a>
+              )
+            })}
           </div>
         </div>
+
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: shouldReduceMotion ? 0 : 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.55,
+            delay: shouldReduceMotion ? 0 : 0.1,
+          }}
+          className="mt-10 rounded-3xl border border-[#E8D8CC] bg-[#FCE0D0] p-7 sm:p-9 lg:p-10"
+        >
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#6B3A3A]">
+                Keep Growing
+              </p>
+
+              <h3 className="mt-3 text-3xl font-bold tracking-[-0.03em] text-[#252525] sm:text-4xl">
+                Learn. Build. Solve. Grow.
+              </h3>
+
+              <p className="mt-4 max-w-xl text-sm leading-7 text-[#6F6A66] sm:text-base">
+                Building practical digital solutions while continuously
+                improving through real projects and learning.
+              </p>
+            </div>
+
+            <a
+              href="mailto:khadija09said09@gmail.com"
+              className="group inline-flex w-fit shrink-0 items-center gap-2 rounded-xl bg-[#D96B4A] px-5 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#C65D3E] hover:shadow-[0_8px_20px_rgba(217,107,74,0.18)]"
+            >
+              Send an Email
+
+              <ArrowUpRight
+                size={17}
+                strokeWidth={2}
+                className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

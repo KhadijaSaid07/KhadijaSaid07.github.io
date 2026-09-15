@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowLeft, ArrowRight, Maximize2 } from 'lucide-react'
 
 const projects = [
@@ -65,6 +65,35 @@ const projects = [
 function ProjectsSection() {
   const [activeProject, setActiveProject] = useState(0)
   const [activeScreenshot, setActiveScreenshot] = useState(0)
+
+  useEffect(() => {
+    const handleProjectSelection = (event) => {
+      const projectId = event.detail?.projectId
+
+      const projectIndex = projects.findIndex(
+        (item) => item.id === projectId,
+      )
+
+      if (projectIndex === -1) {
+        return
+      }
+
+      setActiveProject(projectIndex)
+      setActiveScreenshot(0)
+    }
+
+    window.addEventListener(
+      'portfolio:select-project',
+      handleProjectSelection,
+    )
+
+    return () => {
+      window.removeEventListener(
+        'portfolio:select-project',
+        handleProjectSelection,
+      )
+    }
+  }, [])
 
   const project = projects[activeProject]
   const screenshot = project.screenshots[activeScreenshot]

@@ -62,18 +62,20 @@ const services = [
 
 const projects = [
   {
-    number: 'P01',
+    id: 'marketplace',
+    number: '01',
     title: 'Smart Marketplace for Local Businesses',
-    type: 'Web Application',
+    type: 'WEB APPLICATION',
     description:
-      'A marketplace concept designed to connect customers with local businesses, products, services, and delivery operations.',
+      'A practical marketplace platform designed to connect customers with local businesses, products, services, and delivery operations.',
   },
   {
-    number: 'P02',
+    id: 'revision',
+    number: '02',
     title: 'Smart Revision System',
-    type: 'Web Application',
+    type: 'EDUCATION PLATFORM',
     description:
-      'A learning platform concept designed to help students organize revision activities, learning resources, and study schedules.',
+      'A learning platform designed to support students with revision activities, learning resources, study planning, and structured learning experiences.',
   },
 ]
 
@@ -84,10 +86,20 @@ function ServicesSection() {
   const selectedService = services[activeService]
   const SelectedIcon = selectedService.icon
 
+  const viewProjectDetails = (projectId) => {
+    window.dispatchEvent(
+      new CustomEvent('portfolio:select-project', {
+        detail: {
+          projectId,
+        },
+      }),
+    )
+  }
+
   return (
     <section
       id="services"
-      className="bg-[#101716] text-[#F4EFE5] py-24 md:py-32"
+      className="bg-[#101716] py-24 text-[#F4EFE5] md:py-32"
     >
       <div className="portfolio-shell">
         <div className="section-frame">
@@ -120,7 +132,12 @@ function ServicesSection() {
                   className="mt-9 inline-flex items-center gap-3 border border-[#D6AD5D] bg-[#D6AD5D] px-5 py-3 text-sm font-semibold text-[#101716]"
                 >
                   {showProjects ? 'Hide Projects' : 'Explore Projects'}
-                  <ArrowRight className="h-4 w-4" />
+
+                  <ArrowRight
+                    className={`h-4 w-4 transition-transform duration-200 ${
+                      showProjects ? 'rotate-90' : ''
+                    }`}
+                  />
                 </button>
               </div>
 
@@ -217,7 +234,7 @@ function ServicesSection() {
                 <div className="grid gap-5 md:grid-cols-2">
                   {projects.map((project) => (
                     <article
-                      key={project.number}
+                      key={project.id}
                       className="border border-[#354541] bg-[#172321] p-6 md:p-8"
                     >
                       <div className="flex items-start justify-between gap-5">
@@ -238,18 +255,14 @@ function ServicesSection() {
                         {project.description}
                       </p>
 
-                      <button
-                        type="button"
-                        onClick={() => {
-                          document
-                            .getElementById('projects')
-                            ?.scrollIntoView({ behavior: 'smooth' })
-                        }}
+                      <a
+                        href="#projects"
+                        onClick={() => viewProjectDetails(project.id)}
                         className="mt-7 inline-flex items-center gap-2 border-b border-[#D6AD5D] pb-1 text-sm font-semibold text-[#D6AD5D]"
                       >
                         View Details
                         <ArrowRight className="h-4 w-4" />
-                      </button>
+                      </a>
                     </article>
                   ))}
                 </div>
