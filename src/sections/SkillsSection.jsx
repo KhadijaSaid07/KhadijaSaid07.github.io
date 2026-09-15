@@ -13,50 +13,36 @@ const skillGroups = [
   {
     icon: Globe,
     title: 'Web Development',
-    description:
-      'Technologies I use to build modern web interfaces and applications.',
     skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Tailwind CSS'],
   },
   {
     icon: Smartphone,
     title: 'Mobile Development',
-    description:
-      'Tools and technologies I use while developing and exploring mobile applications.',
     skills: ['Android', 'Java', 'Android Studio', 'SQLite'],
   },
   {
     icon: Braces,
     title: 'Programming',
-    description:
-      'Programming languages I have worked with through study and practical projects.',
     skills: ['C', 'C++', 'C#', 'Java', 'JavaScript'],
   },
   {
     icon: FileCode2,
     title: 'Development & APIs',
-    description:
-      'Technologies I have used for application development and backend-connected systems.',
     skills: ['Java', 'Spring Boot', 'REST APIs'],
   },
   {
     icon: Database,
     title: 'Databases',
-    description:
-      'Database technologies I have worked with for storing and managing application data.',
     skills: ['MySQL', 'PostgreSQL', 'SQLite', 'Oracle Database'],
   },
   {
     icon: Wrench,
     title: 'Tools',
-    description:
-      'Development tools and platforms that support my everyday workflow.',
-    skills: ['Git', 'GitHub', 'VS Code', 'Android Studio'],
+    skills: ['Git', 'GitHub', 'VS Code', 'Android Studio', 'Trello'],
   },
   {
     icon: BookOpen,
     title: 'Technical Documentation',
-    description:
-      'Documentation areas I work with to communicate software ideas and requirements clearly.',
     skills: [
       'SRS',
       'Technical Documentation',
@@ -65,68 +51,76 @@ const skillGroups = [
       'Business Plans',
     ],
   },
+  {
+    icon: BookOpen,
+    title: 'Currently Learning',
+    skills: ['Python', 'Django', 'React Native'],
+  },
 ]
-
-const learning = ['Python', 'Django', 'React Native']
 
 function SkillsSection() {
   return (
     <section
       id="skills"
-      className="bg-[#F8F6F1] px-5 py-20 text-[#242826] sm:px-8 sm:py-24 lg:py-28"
+      className="bg-[#F8F6F1] px-5 py-16 text-[#242826] sm:px-8 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.55 }}
+          transition={{ duration: 0.5 }}
           className="max-w-3xl"
         >
-          <h2 className="text-3xl font-bold tracking-[-0.035em] text-[#242826] sm:text-4xl lg:text-5xl">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#A03F28]">
+            Skills
+          </p>
+
+          <h2 className="mt-2 text-3xl font-bold tracking-[-0.035em] text-[#242826] sm:text-4xl lg:text-5xl">
             Skills & Technologies
           </h2>
 
-          <p className="mt-5 max-w-2xl text-base leading-7 text-[#6F746F] sm:text-lg sm:leading-8">
-            I build with technologies I have studied, practiced, and applied
-            through real projects. I focus on understanding the tools I use
-            and choosing the right technology for the problem.
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#6F746F] sm:text-base">
+            Technologies I have studied, practiced, and used through real
+            projects and continuous learning.
           </p>
         </motion.div>
 
-        <div className="mt-12 grid gap-5 sm:mt-14 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-8 grid gap-3 sm:mt-10 md:grid-cols-2 xl:grid-cols-4">
           {skillGroups.map((group, index) => {
             const Icon = group.icon
 
             return (
               <motion.article
                 key={group.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.12 }}
                 transition={{
-                  duration: 0.45,
-                  delay: index * 0.04,
+                  duration: 0.4,
+                  delay: index * 0.03,
                 }}
-                className="group rounded-2xl border border-[#E5E0D7] bg-white p-6 shadow-[0_8px_25px_rgba(36,40,38,0.035)] transition-all duration-200 hover:-translate-y-1 hover:border-[#326460]/35 hover:shadow-[0_14px_32px_rgba(36,40,38,0.08)] sm:p-7"
+                className="group rounded-xl border border-[#E5E0D7] bg-white p-4 shadow-[0_5px_18px_rgba(36,40,38,0.03)] transition-all duration-250 hover:-translate-y-1 hover:border-[#326460]/50 hover:shadow-[0_12px_28px_rgba(36,40,38,0.10)] sm:p-5"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#326460]/10 text-[#326460] transition-all duration-200 group-hover:bg-[#326460] group-hover:text-white">
-                  <Icon size={20} strokeWidth={1.8} />
+                <div className="flex items-center justify-between">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#326460]/10 text-[#326460] transition-all duration-250 group-hover:scale-105 group-hover:bg-[#326460] group-hover:text-white">
+                    <Icon size={17} strokeWidth={1.8} />
+                  </div>
+
+                  <span className="text-[10px] font-medium text-[#B0B3AE] transition-colors duration-200 group-hover:text-[#326460]">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
                 </div>
 
-                <h3 className="mt-6 text-xl font-semibold tracking-[-0.02em] text-[#242826]">
+                <h3 className="mt-4 text-base font-semibold tracking-[-0.02em] text-[#242826] transition-colors duration-200 group-hover:text-[#326460]">
                   {group.title}
                 </h3>
 
-                <p className="mt-3 text-sm leading-6 text-[#6F746F]">
-                  {group.description}
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-2">
+                <div className="mt-3 flex flex-wrap gap-1.5">
                   {group.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-lg border border-[#E5E0D7] bg-[#F8F6F1] px-3 py-2 text-xs font-medium text-[#242826] transition-colors duration-200 group-hover:border-[#326460]/20"
+                      className="rounded-md border border-[#E5E0D7] bg-[#F8F6F1] px-2.5 py-1.5 text-[11px] font-medium text-[#242826] transition-all duration-200 group-hover:border-[#326460]/20 group-hover:bg-[#F3F7F5]"
                     >
                       {skill}
                     </span>
@@ -136,33 +130,6 @@ function SkillsSection() {
             )
           })}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.55 }}
-          className="mt-6 rounded-2xl border border-[#E5E0D7] bg-white p-6 sm:p-8"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#A03F28]">
-            Currently Learning
-          </p>
-
-          <p className="mt-3 text-sm leading-6 text-[#6F746F] sm:text-base">
-            Learning new technologies through practice and projects.
-          </p>
-
-          <div className="mt-5 flex flex-wrap gap-2.5">
-            {learning.map((skill) => (
-              <span
-                key={skill}
-                className="rounded-lg border border-[#E5E0D7] bg-[#F8F6F1] px-4 py-2.5 text-sm font-medium text-[#242826] transition-colors duration-200 hover:border-[#A03F28]/45 hover:text-[#A03F28]"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   )

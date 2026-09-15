@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ArrowLeft, ArrowRight, Maximize2 } from 'lucide-react'
 
 const projects = [
@@ -7,8 +7,8 @@ const projects = [
     number: '01',
     title: 'Smart Marketplace for Local Businesses',
     category: 'WEB APPLICATION',
-    description:
-      'A practical marketplace platform designed to connect customers with local businesses, products, services, and delivery operations.',
+    shortDescription:
+      'A local marketplace platform connecting customers with businesses, products, services, and delivery operations.',
     technologies: 'React · JavaScript · Tailwind CSS',
     screenshots: [
       {
@@ -34,8 +34,8 @@ const projects = [
     number: '02',
     title: 'Smart Revision System',
     category: 'EDUCATION PLATFORM',
-    description:
-      'A learning platform designed to support students with revision activities, learning resources, study planning, and structured learning experiences.',
+    shortDescription:
+      'An AI-powered learning platform designed to help students revise effectively, plan their studies, and access personalized learning resources.',
     technologies: 'React · Tailwind CSS · Spring Boot · PostgreSQL',
     screenshots: [
       {
@@ -65,41 +65,24 @@ const projects = [
 function ProjectsSection() {
   const [activeProject, setActiveProject] = useState(0)
   const [activeScreenshot, setActiveScreenshot] = useState(0)
-
-  useEffect(() => {
-    const handleProjectSelection = (event) => {
-      const projectId = event.detail?.projectId
-
-      const projectIndex = projects.findIndex(
-        (item) => item.id === projectId,
-      )
-
-      if (projectIndex === -1) {
-        return
-      }
-
-      setActiveProject(projectIndex)
-      setActiveScreenshot(0)
-    }
-
-    window.addEventListener(
-      'portfolio:select-project',
-      handleProjectSelection,
-    )
-
-    return () => {
-      window.removeEventListener(
-        'portfolio:select-project',
-        handleProjectSelection,
-      )
-    }
-  }, [])
+  const [showDetails, setShowDetails] = useState(false)
 
   const project = projects[activeProject]
   const screenshot = project.screenshots[activeScreenshot]
 
   const changeProject = (index) => {
     setActiveProject(index)
+    setActiveScreenshot(0)
+    setShowDetails(false)
+  }
+
+  const viewProjectDetails = () => {
+    setActiveScreenshot(0)
+    setShowDetails(true)
+  }
+
+  const closeProjectDetails = () => {
+    setShowDetails(false)
     setActiveScreenshot(0)
   }
 
@@ -117,94 +100,147 @@ function ProjectsSection() {
 
   return (
     <section
-      id="projects"
-      className="bg-[#181614] py-24 text-[#F4EFE5] md:py-32"
+      id="work"
+      className="bg-[#181614] py-16 text-[#F4EFE5] md:py-24"
     >
       <div className="portfolio-shell">
         <div className="section-frame border-[#443D37]">
-          <div className="px-5 py-16 md:px-10 lg:px-14">
+          <div className="px-5 py-10 md:px-10 md:py-12 lg:px-14">
             <div className="section-number text-[#D6AD5D]">
               07 / Selected Work
             </div>
 
-            <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
-              <div>
-                <p className="technical-label mb-5 text-[#D96B48]">
-                  Projects / Practical Work
-                </p>
+            {!showDetails ? (
+              <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-12">
+                <div>
+                  <p className="technical-label mb-4 text-[#D96B48]">
+                    Projects
+                  </p>
 
-                <h2 className="max-w-xl text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
-                  Ideas turned into
-                  <span className="block text-[#D96B48]">
-                    working experiences.
-                  </span>
-                </h2>
+                  <h2 className="max-w-xl text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
+                    Ideas turned into
+                    <span className="block text-[#D96B48]">
+                      working experiences.
+                    </span>
+                  </h2>
 
-                <p className="mt-7 max-w-lg text-base leading-8 text-[#A9A29A] md:text-lg">
-                  Explore selected projects through their actual interfaces
-                  and application screens.
-                </p>
+                  <div className="mt-7 border-t border-[#443D37]">
+                    {projects.map((item, index) => {
+                      const isActive = index === activeProject
 
-                <div className="mt-10 border-t border-[#443D37]">
-                  {projects.map((item, index) => {
-                    const isActive = index === activeProject
+                      return (
+                        <div
+                          key={item.id}
+                          className={`border-b border-[#443D37] py-4 ${
+                            isActive
+                              ? 'text-[#F4EFE5]'
+                              : 'text-[#847D76]'
+                          }`}
+                        >
+                          <button
+                            type="button"
+                            onClick={() => changeProject(index)}
+                            className="flex w-full items-center gap-4 text-left"
+                          >
+                            <span className="w-8 text-xs font-bold tracking-widest text-[#D6AD5D]">
+                              {item.number}
+                            </span>
 
-                    return (
-                      <button
-                        key={item.id}
-                        type="button"
-                        onClick={() => changeProject(index)}
-                        aria-selected={isActive}
-                        className={`flex w-full items-center gap-4 border-b border-[#443D37] py-5 text-left ${
-                          isActive
-                            ? 'text-[#F4EFE5]'
-                            : 'text-[#847D76]'
-                        }`}
-                      >
-                        <span className="w-8 text-xs font-bold tracking-widest text-[#D6AD5D]">
-                          {item.number}
-                        </span>
+                            <span className="text-sm font-semibold md:text-base">
+                              {item.title}
+                            </span>
+                          </button>
 
-                        <span className="text-sm font-semibold md:text-base">
-                          {item.title}
-                        </span>
-                      </button>
-                    )
-                  })}
+                          {isActive && (
+                            <div className="mt-3 pl-12">
+                              <p className="max-w-lg text-sm leading-6 text-[#A9A29A]">
+                                {item.shortDescription}
+                              </p>
+
+                              <button
+                                type="button"
+                                onClick={viewProjectDetails}
+                                className="mt-3 inline-flex items-center gap-2 border border-[#D96B48] px-4 py-2 text-xs font-semibold text-[#D96B48] transition-all duration-200 hover:bg-[#D96B48] hover:text-white"
+                              >
+                                View Details
+                                <ArrowRight className="h-4 w-4" />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+
+                <div className="flex items-center">
+                  <div className="w-full border border-[#443D37] bg-[#0F0E0D] p-4 md:p-6">
+                    <div className="mb-4">
+                      <p className="text-xs font-bold tracking-[0.2em] text-[#D6AD5D]">
+                        {project.category}
+                      </p>
+
+                      <h3 className="mt-2 text-2xl font-semibold md:text-4xl">
+                        {project.title}
+                      </h3>
+                    </div>
+
+                    <div className="flex min-h-[240px] items-center justify-center overflow-hidden md:min-h-[390px]">
+                      <img
+                        src={project.screenshots[0].image}
+                        alt={`${project.title} preview`}
+                        className="max-h-[500px] w-full object-contain"
+                      />
+                    </div>
+
+                    <div className="mt-4 border-t border-[#443D37] pt-3">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D6AD5D]">
+                        Built with
+                      </p>
+
+                      <p className="mt-1 text-xs text-[#A9A29A]">
+                        {project.technologies}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-
+            ) : (
               <div>
-                <div className="mb-7 flex flex-wrap items-start justify-between gap-5">
+                <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
                   <div>
+                    <button
+                      type="button"
+                      onClick={closeProjectDetails}
+                      className="mb-4 inline-flex items-center gap-2 text-xs font-semibold text-[#A9A29A] transition-colors hover:text-[#F4EFE5]"
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                      Back to Projects
+                    </button>
+
                     <p className="text-xs font-bold tracking-[0.2em] text-[#D6AD5D]">
                       {project.category}
                     </p>
 
-                    <h3 className="mt-3 max-w-2xl text-2xl font-semibold md:text-4xl">
+                    <h2 className="mt-2 max-w-3xl text-3xl font-semibold md:text-5xl">
                       {project.title}
-                    </h3>
+                    </h2>
+
+                    <p className="mt-3 max-w-2xl text-sm leading-7 text-[#A9A29A] md:text-base">
+                      {project.shortDescription}
+                    </p>
+
+                    <p className="mt-3 text-xs text-[#D7D0C4]">
+                      <span className="font-semibold text-[#D6AD5D]">
+                        Built with:
+                      </span>{' '}
+                      {project.technologies}
+                    </p>
                   </div>
 
                   <span className="border border-[#443D37] px-3 py-2 text-xs text-[#A9A29A]">
                     {project.number}
                   </span>
-                </div>
-
-                <div className="mb-7 grid gap-5 md:grid-cols-[1fr_auto]">
-                  <p className="max-w-2xl leading-7 text-[#A9A29A]">
-                    {project.description}
-                  </p>
-
-                  <div className="md:text-right">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D6AD5D]">
-                      Built with
-                    </p>
-
-                    <p className="mt-2 text-xs text-[#D7D0C4]">
-                      {project.technologies}
-                    </p>
-                  </div>
                 </div>
 
                 <div className="project-frame border-[#443D37] bg-[#0F0E0D]">
@@ -219,20 +255,20 @@ function ProjectsSection() {
                     </span>
                   </div>
 
-                  <div className="flex min-h-[280px] items-center justify-center p-4 md:min-h-[480px] md:p-7">
+                  <div className="flex min-h-[260px] items-center justify-center p-4 md:min-h-[450px] md:p-6">
                     <img
                       src={screenshot.image}
                       alt={`${project.title} - ${screenshot.title}`}
-                      className="max-h-[600px] w-full object-contain"
+                      className="max-h-[580px] w-full object-contain"
                     />
                   </div>
 
-                  <div className="flex items-center justify-between border-t border-[#443D37] px-4 py-4">
+                  <div className="flex items-center justify-between border-t border-[#443D37] px-4 py-3">
                     <button
                       type="button"
                       onClick={previousScreenshot}
                       aria-label="Previous screenshot"
-                      className="flex items-center gap-2 border border-[#443D37] px-3 py-2 text-xs text-[#D7D0C4]"
+                      className="flex items-center gap-2 border border-[#443D37] px-3 py-2 text-xs text-[#D7D0C4] transition-colors hover:border-[#D6AD5D] hover:text-[#F4EFE5]"
                     >
                       <ArrowLeft className="h-4 w-4" />
                       Previous
@@ -246,7 +282,7 @@ function ProjectsSection() {
                       type="button"
                       onClick={nextScreenshot}
                       aria-label="Next screenshot"
-                      className="flex items-center gap-2 border border-[#443D37] px-3 py-2 text-xs text-[#D7D0C4]"
+                      className="flex items-center gap-2 border border-[#443D37] px-3 py-2 text-xs text-[#D7D0C4] transition-colors hover:border-[#D6AD5D] hover:text-[#F4EFE5]"
                     >
                       Next
                       <ArrowRight className="h-4 w-4" />
@@ -254,7 +290,7 @@ function ProjectsSection() {
                   </div>
                 </div>
 
-                <div className="screenshot-navigation mt-5">
+                <div className="screenshot-navigation mt-4">
                   {project.screenshots.map((item, index) => (
                     <button
                       key={item.title}
@@ -267,7 +303,7 @@ function ProjectsSection() {
                   ))}
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ function HeroSection() {
       id="home"
       className="relative overflow-hidden bg-[#FBF9F4] pt-28"
     >
-      {/* Background design lines */}
+      {/* Background design */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-[7%] top-0 h-full w-px bg-[#0F4C4A]/[0.07]" />
         <div className="absolute left-[14%] top-0 hidden h-full w-px bg-[#C45A3C]/[0.045] lg:block" />
@@ -33,8 +33,6 @@ function HeroSection() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 pb-16 sm:px-6 md:pb-20 lg:px-8 lg:pb-24">
-
-        {/* Top identity row */}
         <div className="mb-10 flex items-center justify-between gap-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#E0D9CE] bg-white px-3.5 py-2 shadow-sm">
             <MapPin
@@ -58,7 +56,6 @@ function HeroSection() {
         </div>
 
         <div className="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-
           {/* Hero copy */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
@@ -71,11 +68,9 @@ function HeroSection() {
                 <Code2 size={17} strokeWidth={1.8} />
               </div>
 
-              <div>
-                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#0F4C4A]">
-                  Web · Mobile · Documentation
-                </p>
-              </div>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#0F4C4A]">
+                Web · Mobile · Documentation
+              </p>
             </div>
 
             <p className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-[#C45A3C]">
@@ -83,7 +78,7 @@ function HeroSection() {
             </p>
 
             <h1 className="max-w-3xl text-balance text-4xl font-extrabold leading-[1.02] tracking-[-0.045em] text-[#172321] sm:text-5xl md:text-6xl lg:text-[4.7rem]">
-              Hello, I'm
+              Hello, I&apos;m
               <span className="block text-[#0F4C4A]">
                 Khadija Ali Said.
               </span>
@@ -96,7 +91,6 @@ function HeroSection() {
               </span>
             </h2>
 
-            {/* Main personal message */}
             <div className="mt-7 max-w-xl border-l-2 border-[#B58A4A] pl-5">
               <p className="text-base leading-7 text-[#626B67] sm:text-lg">
                 I learn by building, solve problems through technology, and
@@ -105,13 +99,12 @@ function HeroSection() {
               </p>
             </div>
 
-            {/* Journey action */}
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="#journey"
+                href="#work"
                 className="group inline-flex items-center gap-2.5 rounded-xl bg-[#0F4C4A] px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(15,76,74,0.14)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#0A3D3B]"
               >
-                Explore My Journey
+                Explore My Work
 
                 <ArrowDown
                   size={17}
@@ -121,7 +114,6 @@ function HeroSection() {
               </a>
             </div>
 
-            {/* Personal development philosophy */}
             <div className="mt-10">
               <p className="mb-3 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#9A9185]">
                 HOW I APPROACH DEVELOPMENT
@@ -156,15 +148,11 @@ function HeroSection() {
             }}
             className="relative mx-auto w-full max-w-2xl"
           >
-            {/* Decorative circles */}
             <div className="absolute -right-3 -top-3 h-24 w-24 rounded-full border border-[#B58A4A]/30 sm:-right-6 sm:-top-6 sm:h-32 sm:w-32" />
 
             <div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-full border border-[#0F4C4A]/15 sm:-bottom-7 sm:-left-7 sm:h-28 sm:w-28" />
 
-            {/* Main image frame */}
             <div className="relative rounded-[2rem] border border-[#DDD6CA] bg-white p-3 shadow-[0_24px_70px_rgba(23,35,33,0.09)] sm:p-4">
-
-              {/* Browser-style header */}
               <div className="mb-3 flex items-center justify-between px-2 sm:mb-4">
                 <div className="flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-[#C45A3C]" />
@@ -177,7 +165,6 @@ function HeroSection() {
                 </span>
               </div>
 
-              {/* Profile image */}
               <div className="relative overflow-hidden rounded-[1.5rem] bg-[#F1F5F2]">
                 <img
                   src="/images/profile.png"
@@ -185,7 +172,6 @@ function HeroSection() {
                   className="block h-auto max-h-[620px] min-h-[300px] w-full object-contain"
                 />
 
-                {/* Image message */}
                 <div className="absolute bottom-4 left-4 right-4 sm:bottom-5 sm:left-5 sm:right-5">
                   <div className="inline-flex max-w-full items-center gap-3 rounded-2xl border border-white/70 bg-[#FFFDF8]/95 px-4 py-3 shadow-lg backdrop-blur-md">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#0F4C4A] text-white">
@@ -205,7 +191,6 @@ function HeroSection() {
                 </div>
               </div>
 
-              {/* Identity strip */}
               <div className="mt-3 grid grid-cols-3 gap-2 sm:mt-4">
                 <div className="flex items-center gap-2 rounded-xl bg-[#FBF9F4] px-3 py-3">
                   <Code2
@@ -245,7 +230,6 @@ function HeroSection() {
               </div>
             </div>
 
-            {/* Floating label */}
             <div className="absolute -bottom-3 right-5 hidden rounded-full border border-[#DDD6CA] bg-[#FFFDF8] px-3 py-2 shadow-md sm:block">
               <span className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-[#0F4C4A]">
                 Learn · Build · Grow
@@ -253,24 +237,6 @@ function HeroSection() {
             </div>
           </motion.div>
         </div>
-
-        {/* Bottom direction line */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.55 }}
-          className="mt-14 flex items-center gap-3 border-t border-[#D5CEC2] pt-5 sm:mt-16"
-        >
-          <span className="font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-[#9A9185]">
-            Direction
-          </span>
-
-          <span className="h-px w-8 bg-[#B58A4A]" />
-
-          <span className="text-xs font-medium text-[#707975]">
-            Building today. Improving every day.
-          </span>
-        </motion.div>
       </div>
     </section>
   )
