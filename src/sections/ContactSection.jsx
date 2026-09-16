@@ -23,7 +23,7 @@ const contactItems = [
   {
     icon: Link,
     label: 'LinkedIn',
-    value: 'Khadija Ali Said',
+    value: 'Khadija Said',
     href: 'https://www.linkedin.com/in/khadija-ali-said-353926363',
   },
 ]

@@ -6,7 +6,7 @@ const aboutCards = [
     number: '01',
     title: 'What I Do',
     icon: Code2,
-    text: 'Web Development · Mobile Apps · Technical Documentation',
+    text: 'Web Development · Mobile Apps · Technical Documentation  . Technical Support',
   },
   {
     number: '02',
@@ -61,7 +61,7 @@ function AboutSection() {
                   I&apos;m Khadija Ali Said, a Web &amp; Mobile Developer and
                   Computer Science student. I build practical digital solutions
                   through web development, mobile applications, and technical
-                  documentation. I believe in learning through building,
+                  documentation and support.I believe in learning through building,
                   solving problems with purpose, and continuously improving my
                   skills to turn ideas into meaningful digital solutions.
                 </p>
