@@ -9,7 +9,7 @@ function Footer() {
             <p className="text-lg font-semibold">KHALSA360</p>
 
             <p className="mt-2 max-w-md text-sm leading-6 text-[#9CA7A1]">
-              Web & Mobile Developer | Technical Documentation| Technical support
+              Web & Mobile Developer | Technical Support
             </p>
 
             <p className="mt-1 text-sm text-[#9CA7A1]">
