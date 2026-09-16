@@ -69,7 +69,7 @@ function HeroSection() {
               </div>
 
               <p className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#0F4C4A]">
-                Web · Mobile · Documentation
+                Web · Mobile · Documentation · Technical Support
               </p>
             </div>
 
@@ -224,7 +224,7 @@ function HeroSection() {
                   />
 
                   <span className="text-[10px] font-semibold text-[#46524E] sm:text-xs">
-                    Documentation
+                    Documentation 
                   </span>
                 </div>
               </div>
